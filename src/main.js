@@ -5,6 +5,8 @@ import '@babel/polyfill'
 
 Vue.config.productionTip = false
 
+import '@/css/fonts.css';
+
 new Vue({
   vuetify,
   render: h => h(App)
