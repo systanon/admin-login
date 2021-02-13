@@ -20,7 +20,9 @@ export default {
     //
   }),
   created(){
-    localStorage.setItem('redirectPath', window.location.pathname)
+    let path = window.location.pathname
+    if(path.includes('admin')) path = path.slice(6)
+    localStorage.setItem('redirectPath', path)
   }
 };
 </script>
