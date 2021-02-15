@@ -38,7 +38,7 @@
     }),
     methods: {
       async sendData(data) {
-        const res = await fetch(`${process.env.VUE_APP_API_URL}/admin/login`, {
+        const res = await fetch(`${process.env.VUE_APP_API_URL}/admin`, {
           method: 'POST',
           mode: 'cors',
           cache: 'no-cache',
@@ -52,7 +52,8 @@
         });
         if (res.status === 200) {
           res.headers.get('Set-Cookie');
-          //  window.location.href = `${process.env.VUE_APP_API_URL}/admin`;
+          const response = await res.json()
+          window.location.href = response.link;
         } else {
           this.error = true;
         }
