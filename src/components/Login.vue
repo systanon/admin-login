@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form ref="form" class="form" align="center">
+    <v-form ref="form" class="form">
       <v-text-field v-model="login" :rules="[rules.required]" label="login" />
       <div class="input-pass">
         <v-text-field
@@ -11,10 +11,13 @@
         />
         <v-checkbox label="Show" class="show-pass pa-0 ma-0" v-model="showPass">show</v-checkbox>
       </div>
-      <v-btn class="mt-8 yellow-button" @click="submit" color="buttons" rounded large
-        >sign in</v-btn
-      >
+      <div class="d-flex justify-center">
+        <v-btn class="mt-8 yellow-button" @click="submit" color="buttons" rounded large
+          >sign in</v-btn
+        >
+      </div>
     </v-form>
+
     <Error :error.sync="error" :errorType="errorType" :errorMessage="errorMessage" />
   </div>
 </template>
@@ -52,7 +55,7 @@
         });
         if (res.status === 200) {
           res.headers.get('Set-Cookie');
-          const response = await res.json()
+          const response = await res.json();
           window.location.href = response.link;
         } else {
           this.error = true;
