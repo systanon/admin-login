@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-form ref="form" class="form">
-      <v-text-field v-model="login" :rules="[rules.required]" label="login" />
+      <v-text-field v-model.trim="login" :rules="[rules.required, rules.email]" label="email" />
       <div class="input-pass">
         <v-text-field
-          v-model="password"
+          v-model.trim="password"
           :type="showPass ? 'text' : 'password'"
           :rules="[rules.required]"
           label="password"
@@ -37,6 +37,15 @@
       showPass: false,
       rules: {
         required: (v) => !!v || 'input is required',
+        email: (value) => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          const emailError = !pattern.test(value);
+          return (
+            !value ||
+            !emailError ||
+            'Please enter your email address in format: yourname@example.com'
+          );
+        },
       },
     }),
     methods: {
